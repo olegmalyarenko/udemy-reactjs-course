@@ -1,8 +1,8 @@
 import React from 'react';
-import AppHeader from './components/AppHeader';
-import SearchPannel from './components/SearchPannel';
-import TodoList from './components/TodoList';
-import ItemFilter from './components/ItemFilter';
+import AppHeader from '../AppHeader';
+import SearchPannel from '../SearchPannel';
+import TodoList from '../TodoList';
+import ItemFilter from '../ItemFilter';
 import './App.css';
 
 
