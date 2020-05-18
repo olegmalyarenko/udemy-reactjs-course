@@ -12,10 +12,21 @@ export default class App extends Component {
     maxId = 100;
 
     state = {
-        todos : [ { label: 'One', important: false, id : 1},
-        {label:'Two', important: true, id : 2 }, 
-        {label:'Three', important: true, id : 3} ]
+        
+        todos : [ this.createTodoItem('Drink Coffe'),
+        this.createTodoItem('Two'),
+        this.createTodoItem('Three') ]
 
+    }
+
+    createTodoItem(label){
+        return {
+            label,
+            important: false,
+            done: false,
+            id: this.maxId++
+
+        }
     }
 
     deliteItem = (id) => {
@@ -33,7 +44,7 @@ export default class App extends Component {
 
     addItem = (text) => {
         
-        const newTask = {label: text, important: true, id : this.maxId++}
+        const newTask = this.createTodoItem(text);
 
         this.setState(({ todos }) => { 
             const newArr = [ ...todos, newTask]
@@ -44,8 +55,34 @@ export default class App extends Component {
 
         })
     }
-
     
+    onToggleImportant = (id) => {
+        this.setState(({ todos }) => { 
+            const index = todos.findIndex((el) => el.id === id );
+            const oldItem = todos[index];
+            const newItem = {...oldItem, important: !oldItem.important}
+            const newArr = [ ...todos.slice(0, index), 
+                newItem,
+                ...todos.slice(index + 1)]
+             return {
+                 todos: newArr
+             }
+            })
+    }
+    
+    onToggleDone = (id) => {
+       this.setState(({ todos }) => { 
+        const index = todos.findIndex((el) => el.id === id );
+        const oldItem = todos[index];
+        const newItem = {...oldItem, done: !oldItem.done}
+        const newArr = [ ...todos.slice(0, index), 
+            newItem,
+            ...todos.slice(index + 1)]
+         return {
+             todos: newArr
+         }
+        })
+    }
     
     render() {
     return (
@@ -59,7 +96,10 @@ export default class App extends Component {
 
          <TodoList 
          todos= {this.state.todos}
-         onDeleted= {this.deliteItem}/>
+         onDeleted= {this.deliteItem}
+         onToggleImportant= {this.onToggleImportant}
+         onToggleDone = {this.onToggleDone}
+         />
 
          <AddButton  addItem = {this.addItem} />
      
