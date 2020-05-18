@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './ItemFilter.css';
 
 export default class ItemFilter extends Component {
+
+        
         render () {
                 return (
                         <div className="btn-group">
