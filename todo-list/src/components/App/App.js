@@ -55,39 +55,47 @@ export default class App extends Component {
 
         })
     }
+
+    toggleProperty(arr, id, propName ) {
+                   
+            const index = arr.findIndex((el) => el.id === id );
+            const oldItem = arr[index];
+            const newItem = {...oldItem, [propName]: !oldItem[propName]};
+            return [ ...arr.slice(0, index), 
+                newItem,
+                ...arr.slice(index + 1)];
+                
+
+    }
     
     onToggleImportant = (id) => {
         this.setState(({ todos }) => { 
-            const index = todos.findIndex((el) => el.id === id );
-            const oldItem = todos[index];
-            const newItem = {...oldItem, important: !oldItem.important}
-            const newArr = [ ...todos.slice(0, index), 
-                newItem,
-                ...todos.slice(index + 1)]
-             return {
-                 todos: newArr
-             }
-            })
+            return {
+                todos: this.toggleProperty(todos, id, 'important')
+            }
+
+        })
+        
     }
     
     onToggleDone = (id) => {
        this.setState(({ todos }) => { 
-        const index = todos.findIndex((el) => el.id === id );
-        const oldItem = todos[index];
-        const newItem = {...oldItem, done: !oldItem.done}
-        const newArr = [ ...todos.slice(0, index), 
-            newItem,
-            ...todos.slice(index + 1)]
-         return {
-             todos: newArr
-         }
+        return {
+            todos: this.toggleProperty(todos, id, 'done')
+        }
         })
     }
     
     render() {
+        const { todos } = this.state;
+        const doneCounter = todos
+        .filter((el) => el.done).length;
+         
+        const todoCounter =  todos
+        .filter((el) => el.done === false).length;
     return (
         <div className='todo-app'>
-         <AppHeader toDo={1} done={3} />
+         <AppHeader toDo={todoCounter} done={doneCounter} />
 
          <div className="top-panel d-flex">
          <SearchPannel />
@@ -95,7 +103,7 @@ export default class App extends Component {
          </div>
 
          <TodoList 
-         todos= {this.state.todos}
+         todos= {todos}
          onDeleted= {this.deliteItem}
          onToggleImportant= {this.onToggleImportant}
          onToggleDone = {this.onToggleDone}
