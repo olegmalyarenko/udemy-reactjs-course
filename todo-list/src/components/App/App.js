@@ -3,10 +3,13 @@ import AppHeader from '../AppHeader';
 import SearchPannel from '../SearchPannel';
 import TodoList from '../TodoList';
 import ItemFilter from '../ItemFilter';
+import AddButton from '../AddButton';
 import './App.css';
 
 
 export default class App extends Component { 
+
+    maxId = 100;
 
     state = {
         todos : [ { label: 'One', important: false, id : 1},
@@ -28,6 +31,20 @@ export default class App extends Component {
      })
     };
 
+    addItem = (text) => {
+        
+        const newTask = {label: text, important: true, id : this.maxId++}
+
+        this.setState(({ todos }) => { 
+            const newArr = [ ...todos, newTask]
+
+            return {
+                todos: newArr
+            }
+
+        })
+    }
+
     
     
     render() {
@@ -43,6 +60,8 @@ export default class App extends Component {
          <TodoList 
          todos= {this.state.todos}
          onDeleted= {this.deliteItem}/>
+
+         <AddButton  addItem = {this.addItem} />
      
 
         </div>
