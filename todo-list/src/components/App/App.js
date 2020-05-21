@@ -110,7 +110,29 @@ export default class App extends Component {
         }
         })
     }
-    
+    todoFilter = () => {
+        this.setState(({ todos }) => {
+        const filter = todos.filter((el) => el.done === false);
+        if(filter.length === 0) {
+            return todos;
+        } 
+        return {
+            todos: filter,
+        }
+        })
+    }
+    doneFilter = () => {
+        this.setState(({ todos }) => {
+            const done = todos.filter((el) => el.done);
+            if(done.length === 0) {
+                return todos;
+            } 
+            return {
+                todos: done,
+            }
+        })
+
+    }
     render() {
         const { todos, term } = this.state;
         const visible = this.searchItem(todos,term);
@@ -124,8 +146,12 @@ export default class App extends Component {
          <AppHeader toDo={todoCounter} done={doneCounter} />
 
          <div className="top-panel d-flex">
-         <SearchPannel onSearchChange={this.onSearchChange}/>
-         <ItemFilter/>
+         <SearchPannel 
+         onSearchChange={this.onSearchChange}
+         />
+         <ItemFilter 
+         todoFilter={this.todoFilter}
+         doneFilter={this.doneFilter}/>
          </div>
 
          <TodoList 
