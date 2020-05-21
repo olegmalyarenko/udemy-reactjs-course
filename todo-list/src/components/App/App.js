@@ -16,7 +16,8 @@ export default class App extends Component {
         todos : [ this.createTodoItem('Drink Coffe'),
         this.createTodoItem('Two'),
         this.createTodoItem('Three') ],
-        term :''
+        term :'',
+        filter :''
 
     }
 
@@ -47,7 +48,11 @@ export default class App extends Component {
         this.setState({ term });
 
     };
+    
+    onFilterChange = (filter) => {
+        this.setState({ filter });
 
+    };
     searchItem = (todos, term) => {
 
         
@@ -58,14 +63,24 @@ export default class App extends Component {
          return todos.filter((el) => {
             return el.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
         } );
-       
+    };
 
-       
+    filterItem = (todos, filter) => {
+
+        switch(filter) {
+            case 'all' : return todos;
+
+            
+            case 'done': return todos.filter((el) =>  el.done);
+
+            case 'active': return todos.filter((el) =>  !el.done);
+
+            default : return todos;
+        }
+
         
        
-
-    
-   };
+     };
 
     addItem = (text) => {
         
@@ -110,37 +125,13 @@ export default class App extends Component {
         }
         })
     }
-    todoFilter = () => {
-        this.setState(({ todos }) => {
-        const filter = todos.filter((el) => el.done === false);
-        if(filter.length === 0) {
-            return todos;
-        } 
-        return {
-            todos: filter,
-        }
-        })
-    }
-    doneFilter = () => {
-        this.setState(({ todos }) => {
-            const done = todos.filter((el) => el.done);
-            if(done.length === 0) {
-                return todos;
-            } 
-            return {
-                todos: done,
-            }
-        })
-
-    }
+    
     render() {
-        const { todos, term } = this.state;
-        const visible = this.searchItem(todos,term);
-        const doneCounter = todos
-        .filter((el) => el.done).length;
-         
-        const todoCounter =  todos
-        .filter((el) => el.done === false).length;
+        const { todos, term, filter } = this.state;
+        const doneCounter = todos.filter((el) => el.done).length;
+        const todoCounter =  todos.filter((el) => el.done === false).length;
+        const visible = this.searchItem(this.filterItem(todos, filter), term);
+        
     return (
         <div className='todo-app'>
          <AppHeader toDo={todoCounter} done={doneCounter} />
@@ -150,8 +141,9 @@ export default class App extends Component {
          onSearchChange={this.onSearchChange}
          />
          <ItemFilter 
-         todoFilter={this.todoFilter}
-         doneFilter={this.doneFilter}/>
+         filter={filter}
+         onFilterChange={this.onFilterChange}
+         />
          </div>
 
          <TodoList 
