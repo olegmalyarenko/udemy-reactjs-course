@@ -1,0 +1,11 @@
+.header {
+  margin: 10px 30vw;
+}
+
+.header ul li {
+  display: flex;
+  align-items: center;
+  margin: 2%;
+
+  list-style: none;
+}
