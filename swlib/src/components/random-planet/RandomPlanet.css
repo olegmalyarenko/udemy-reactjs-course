@@ -8,3 +8,8 @@
 .term {
   margin: 5%;
 }
+
+.random-planet {
+  display: flex;
+  justify-content: center;
+}
