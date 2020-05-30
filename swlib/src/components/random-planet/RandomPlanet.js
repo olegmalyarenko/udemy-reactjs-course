@@ -5,16 +5,20 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 export default class RandomPlanet extends Component {
-    swapiService = new SwapiService;
+    swapiService = new SwapiService();
     state = {
         planet: {},
         loading: true,
         error: false
     }
 
-    constructor() {
-        super();
+    componentDidMount () {
         this.updatePlanet(); 
+        this.interval = setInterval( this.updatePlanet,4500)
+    }
+
+    componentWillMount (){
+        console.log('компонент удалился')
     }
 
     onPlanetLoaded = (planet) => {
@@ -29,13 +33,13 @@ export default class RandomPlanet extends Component {
         });
 
     }
-    updatePlanet() {
-        const id = Math.floor(Math.random()* 25 + 1);
+    updatePlanet = () => {
+        const id = Math.floor(Math.random()* 17 + 3);
         this.swapiService.getPlanet(id)
         .then(this.onPlanetLoaded)
         .catch(this.onError);
     }
-
+    
     
 
     render() {
@@ -51,7 +55,8 @@ export default class RandomPlanet extends Component {
         <div className='random-planet d-flex jumbotron rounded'>
             {errorMessage}
             {spinner}
-            {content}      
+            {content}   
+                
         </div>
         )  
     }
