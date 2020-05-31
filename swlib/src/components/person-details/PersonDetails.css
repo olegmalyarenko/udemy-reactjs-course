@@ -1,9 +1,10 @@
+
 .person-details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 1rem;
 
-  border: 1px solid #444444;
+  border: 1px solid #d3bbbb;
 }
 
 .person-details .person-image {
