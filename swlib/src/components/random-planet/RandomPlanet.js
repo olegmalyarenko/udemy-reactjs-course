@@ -19,6 +19,7 @@ export default class RandomPlanet extends Component {
 
     componentWillMount (){
         console.log('компонент удалился')
+        clearInterval(this.interval);
     }
 
     onPlanetLoaded = (planet) => {
