@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './PersonDetails.css';
 import SwapiService from '../../services/swapi-service.js';
 import Spinner from '../spinner';
+import ErrorButton from '../error-button';
 
 export default class PersonDetails extends Component {
     swapiService = new SwapiService(); 
@@ -55,13 +56,16 @@ export default class PersonDetails extends Component {
         const { id, name, gender,
             birthYear, eyeColor
         } = this.state.person;
-        
+
         console.log(this.state.person);
         return (
             <div className="person-details card">
+
+                <div className="card-img">
                 <img className="person-image"
                 src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} 
                 alt="character"></img>
+                </div>
 
                 <div className="card-body">
                   <h4>{name} {this.props.personId}</h4>
@@ -81,6 +85,7 @@ export default class PersonDetails extends Component {
                     
                 
                  </ul> 
+                 <ErrorButton/>
                  </div>    
 
             </div>

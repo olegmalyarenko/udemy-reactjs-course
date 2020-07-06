@@ -1,13 +1,13 @@
 
 .person-details {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   padding: 1rem;
 
   border: 1px solid #d3bbbb;
 }
 
-.person-details .person-image {
+.person-image {
   width: 30%;
   height: 30%;
 
@@ -21,3 +21,7 @@
 .person-details .list-group-item .term {
   margin-right: 0.5rem;
 }
+.list-group {
+  margin-bottom: 17px;
+}
+
