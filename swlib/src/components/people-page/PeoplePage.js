@@ -4,6 +4,7 @@ import './PeoplePage.css';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
+import Row from '../row';
 import SwapiService from '../../services/swapi-service.js';
 
 export default class PeoplePage extends Component {
@@ -25,23 +26,25 @@ export default class PeoplePage extends Component {
         this.setState({hasError: true})
       }
 
+  
+
     render(){
         if (this.state.hasError) {
             return <ErrorIndicator />
         }
-        return (
-            <div className='row mb2'>
-                    <div className="col-md-6"> 
-                      <ItemList 
-                        onItemsSelected= {this.onPersonSelected}
-                        getData = {this.swapiService.getAllPeople}
-                        renderItem = {({name, gender,birthYear}) => `${name} (${gender}, ${birthYear})`}/>
-                    </div>
+        const itemList = (
+            <ItemList 
+            onItemsSelected= {this.onPersonSelected}
+            getData = {this.swapiService.getAllPeople}
+            renderItem = {({name, gender,birthYear}) => `${name} (${gender}, ${birthYear})`}/>
+        )  
 
-                    <div className="col-md-6">
-                      <PersonDetails personId = {this.state.selectedPerson} />
-                    </div>   
-            </div>
+        const personDetails = (
+            <PersonDetails personId = {this.state.selectedPerson} />
+        )
+        return (
+            <Row left={itemList} right={personDetails} />
+           
         )
     }
 }
