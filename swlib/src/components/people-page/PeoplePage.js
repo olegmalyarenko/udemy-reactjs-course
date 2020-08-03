@@ -5,14 +5,15 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
 import Row from '../row';
+import ErrorBoundry from '../error-boundry';
 import SwapiService from '../../services/swapi-service.js';
 
 export default class PeoplePage extends Component {
     swapiService= new SwapiService();
 
     state = {
-        selectedPerson: 3,
-        hasError: false
+        selectedPerson: 3
+        
     }
 
     onPersonSelected = (selectedPerson) => {
@@ -21,12 +22,7 @@ export default class PeoplePage extends Component {
         });
     }
 
-    componentDidCatch() {
-        console.log('componentDidCatch');
-        this.setState({hasError: true})
-      }
-
-  
+    
 
     render(){
         if (this.state.hasError) {
@@ -44,11 +40,14 @@ export default class PeoplePage extends Component {
         )  
 
         const personDetails = (
+            <ErrorBoundry>
             <PersonDetails personId = {this.state.selectedPerson} />
+            </ErrorBoundry>
         )
         return (
+            
             <Row left={itemList} right={personDetails} />
-           
+            
         )
     }
 }
