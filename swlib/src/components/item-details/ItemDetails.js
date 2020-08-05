@@ -1,49 +1,53 @@
 import React, { Component } from 'react';
-import './PersonDetails.css';
+import './ItemDetails.css';
 import SwapiService from '../../services/swapi-service.js';
 import Spinner from '../spinner';
 import ErrorButton from '../error-button';
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
     swapiService = new SwapiService(); 
 
     state = {
-        person: null,
+        item: null,
+        image: null,
         loading: true
     };
 
     componentDidMount(){
-        this.updatePerson();
+        this.updateItem();
 
     }
 
     componentDidUpdate (prevProps){
-      if (this.props.personId !== prevProps.personId){
-        this.updatePerson();
+      if (this.props.itemId !== prevProps.itemId){
+        this.updateItem();
       }
     }
 
-    updatePerson(){
+    updateItem(){
         
-        const { personId } = this.props;
-        console.log(personId);
-        if (!personId) {
+        const { itemId, getData, getImageUrl } = this.props;
+        console.log('itemid', itemId);
+        if (!itemId) {
             return;
         }
-        this.swapiService.getPerson(personId)
-        .then((person) => {
+        getData(itemId)
+        .then((item) => {
             this.setState({
-            person,
-            loading: false
+            item,
+            loading: false,
+            image: getImageUrl(item)
+            
         });
+        console.log('новый айтем', this.state.item);
        });
-       console.log(this.state.person);
+       
 
     }
 
     render() {
 
-        if (!this.state.person) {
+        if (!this.state.item) {
             return <span>Select person from the list</span>
         }
 
@@ -52,18 +56,18 @@ export default class PersonDetails extends Component {
             return <Spinner />; 
 
         }
-
+        const { image } = this.state;
         const { id, name, gender,
             birthYear, eyeColor
-        } = this.state.person;
+        } = this.state.item;
 
-        console.log(this.state.person);
+        console.log(this.state.item);
         return (
             <div className="person-details card">
 
                 <div className="card-img">
                 <img className="person-image"
-                src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} 
+                src={image} 
                 alt="character"></img>
                 </div>
 
