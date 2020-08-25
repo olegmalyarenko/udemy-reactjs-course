@@ -3,7 +3,9 @@ import './ItemDetails.css';
 import SwapiService from '../../services/swapi-service.js';
 import Spinner from '../spinner';
 import ErrorButton from '../error-button';
- 
+
+
+  
 
 export default class ItemDetails extends Component {
     swapiService = new SwapiService(); 
