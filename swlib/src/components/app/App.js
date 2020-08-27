@@ -9,7 +9,11 @@ import Row from '../row';
 import {
  PersonList,
  PlanetList,
- StarshipList
+ StarshipList,
+ PersonDetails,
+ PlanetDetails,
+ StarshipDetails
+
 } from '../sw-components';
 import SwapiService from '../../services/swapi-service.js';
 import ItemDetails from "../item-details";
@@ -90,6 +94,15 @@ const starshipDetails = (
                 </button>
                 <ErrorButton/>
                </div>
+
+
+               <PersonDetails itemId={1}/>
+
+               <StarshipDetails itemId={2}/>
+
+               <PlanetDetails itemId={3}/>
+
+
                
                <PersonList>
                  { ({name}) => <span>{name}</span> }
