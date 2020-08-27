@@ -13,14 +13,13 @@ export default class SwapiService {
         return await res.json();
       }
     
-      getAllPeople= async () => {
+      getAllPeople = async () => {
         const res = await this.getResource(`/people/`);
         return res.results.map(this._transformPerson).slice(0, 5);
       }
     
       getPerson = async (id) => {
         const person = await this.getResource(`/people/${id}/`);
-        console.log('йо йо персон!!!!', person);
         return this._transformPerson(person);
       }
     
