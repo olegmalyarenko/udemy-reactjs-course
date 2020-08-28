@@ -104,18 +104,12 @@ const starshipDetails = (
 
 
                
-               <PersonList>
-                 { ({name}) => <span>{name}</span> }
-               </PersonList>
-
-               <PlanetList>
-                 { ({name}) => <span>{name}</span> }
-               </PlanetList>
-
-
-               <StarshipList>
-                 { ({name}) => <span>{name}</span> }
-               </StarshipList>
+               <PersonList/>
+                
+               <PlanetList/>
+                
+               <StarshipList/>
+                 
             </div>
         )
     } 
