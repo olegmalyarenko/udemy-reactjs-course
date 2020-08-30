@@ -1,13 +1,10 @@
 import React from 'react';
 import ItemDetails from '../item-details';
 import Record from '../record';
-import { SwapiServiceConsumer } from '../sw-contex';
+import { withSwapiService } from '../hoc-helpers';
 
-const StarshipDetails = ({ itemId }) => {
-    return(
-    <SwapiServiceConsumer>
-         {
-            ({getStarship, getStarshipImage }) => {
+const StarshipDetails = ({ itemId, swapiService }) => {
+  const { getStarship, getStarshipImage } = swapiService; 
               return (
               <ItemDetails
                itemId={itemId}
@@ -19,10 +16,7 @@ const StarshipDetails = ({ itemId }) => {
                <Record field="constInCredits" label="Const"/>
               </ItemDetails>
               )
-            }
-        }
-       </SwapiServiceConsumer>      
-    );
+        
 };
 
-export default StarshipDetails;
+export default withSwapiService(StarshipDetails);

@@ -1,14 +1,10 @@
 import React from 'react';
 import ItemDetails from '../item-details';
 import Record from '../record';
-import { SwapiServiceConsumer } from '../sw-contex';
-import { PersonList } from './item-lists';
+import { withSwapiService } from '../hoc-helpers';
 
-const PlanetDetails = ({ itemId }) => {
-    return(
-        <SwapiServiceConsumer>
-         {
-            ({getPlanet, getPlanetImage }) => {
+const PlanetDetails = ({ itemId, swapiService }) => {
+    const { getPlanet, getPlanetImage } = swapiService; 
               return (
               <ItemDetails
                 itemId={itemId}
@@ -20,11 +16,7 @@ const PlanetDetails = ({ itemId }) => {
                 <Record field="diametr" label="Diametr"/>
               </ItemDetails>
               );
-            }
-         }
-        </SwapiServiceConsumer>
-    );
-    
+          
 };
 
-export default PlanetDetails;
+export default withSwapiService(PlanetDetails);
