@@ -5,6 +5,7 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
+import { SwapiServiceProvider } from '../sw-contex';
 import Row from '../row';
 import {
  PersonList,
@@ -84,6 +85,7 @@ const starshipDetails = (
 
         return (
             <div className="stardb-app">
+              <SwapiServiceProvider value={this.swapiService}>
               <Header/>
               { planet }
               <div className="buttons row mb2 button-row">
@@ -109,7 +111,7 @@ const starshipDetails = (
                <PlanetList/>
                 
                <StarshipList/>
-                 
+               </SwapiServiceProvider>   
             </div>
         )
     } 
