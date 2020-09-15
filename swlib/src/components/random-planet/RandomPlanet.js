@@ -5,6 +5,10 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 export default class RandomPlanet extends Component {
+    static defaultProps = {
+        updateInterval : 5000
+    };
+
     swapiService = new SwapiService();
     state = {
         planet: {},
@@ -13,8 +17,9 @@ export default class RandomPlanet extends Component {
     }
 
     componentDidMount () {
+        const { updateInterval } = this.props;
         this.updatePlanet(); 
-        this.interval = setInterval( this.updatePlanet,4500)
+        this.interval = setInterval( this.updatePlanet,updateInterval);
     }
 
     componentWillMount (){
@@ -62,6 +67,8 @@ export default class RandomPlanet extends Component {
         )  
     }
 }
+
+
 
 const PlanetView = ({planet}) => {
     const  { population, rotationPeriod, diameter, name, id} = planet;
