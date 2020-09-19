@@ -1,27 +1,16 @@
 import React,{ Component } from 'react';
-
 import './App.css';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 import { SwapiServiceProvider } from '../sw-contex';
-import Row from '../row';
-import {
- PersonList,
- PlanetList,
- StarshipList,
- PersonDetails,
- PlanetDetails,
- StarshipDetails
+import { PeoplePage, StarshipPage, PlanetPage } from '../pages';
 
-} from '../sw-components';
 import SwapiService from '../../services/swapi-service.js';
 export default class App extends Component {
   swapiService= new SwapiService();
 
     state = {
-        showRandomPlanet: true,
         hasError: false
     }
 
@@ -44,20 +33,13 @@ export default class App extends Component {
               <Header/>
               <RandomPlanet/>
               
-               <Row 
-               left={<PersonList/>} 
-               right={ <PersonDetails itemId={1}/>}
-               />
+               <PeoplePage />
 
-              <Row 
-               left={<PlanetList/>} 
-               right={<PlanetDetails itemId={3}/>}
-               />
+               <PlanetPage />
+               <StarshipPage />
 
-              <Row 
-               left={<StarshipList/>} 
-               right={ <StarshipDetails itemId={2}/> }
-               />
+
+              
             
                </SwapiServiceProvider>   
             </div>
