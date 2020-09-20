@@ -49,8 +49,8 @@ export default class SwapiService {
       }
 
       getStarshipImage = ({id}) => {
-        console.log('getId!!!!', id);
-        console.log('get  картинка корабля', `${this._imageBase}/starships/${id}.jpg`);
+        //console.log('getId!!!!', id);
+        //console.log('get  картинка корабля', `${this._imageBase}/starships/${id}.jpg`);
         return `${this._imageBase}/starships/${id}.jpg`;
       }
 
@@ -59,7 +59,7 @@ export default class SwapiService {
       }
     
       _extractId = (item) => {
-        console.log(item);
+        //console.log(item);
         const idRegExp = /\/([0-9]*)\/$/;
         return item.url.match(idRegExp)[1];
       }
@@ -76,7 +76,7 @@ export default class SwapiService {
       }
     
       _transformStarship = (starship) => {
-        console.log('вход щип', starship);
+        //console.log('вход щип', starship);
         return {
           id: this._extractId(starship),
           name: starship.name,
@@ -91,7 +91,7 @@ export default class SwapiService {
       }
     
       _transformPerson = (person) => {
-        console.log('вход персон', person);
+        //console.log('вход персон', person);
         return {
           id: this._extractId(person),
           name: person.name,

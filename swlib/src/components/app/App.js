@@ -17,8 +17,6 @@ import {
 
 } from '../sw-components';
 import SwapiService from '../../services/swapi-service.js';
-import ItemDetails from "../item-details";
-import Record from '../record';
 export default class App extends Component {
   swapiService= new SwapiService();
 
@@ -50,40 +48,7 @@ export default class App extends Component {
         const planet = this.state.showRandomPlanet ?
       <RandomPlanet/> : null;
 
-      const { getPerson,
-        getStarship,
-        getPersonImage,
-        getStarshipImage } = this.swapiService;
-
-const personDetails = (
-  <ItemDetails
-    itemId={11}
-    getData={getPerson}
-    getImageUrl={getPersonImage} >
-
-     <Record field="gender" label="Gender"/> 
-     <Record field="eyeColor" label="Eye Color"/>  
-
-  </ItemDetails>
-);
-
-const starshipDetails = (
-  <ItemDetails
-    itemId={2}
-    getData={getStarship}
-    getImageUrl={getStarshipImage}>
-
-  <Record field="model" label="Model"/> 
-  <Record field="length" label="Length"/>  
-  <Record field="constInCredits" label="Const"/>
-
-    
-  </ItemDetails>
-
-);
-
-
-        return (
+      return (
             <div className="stardb-app">
               <SwapiServiceProvider value={this.swapiService}>
               <Header/>

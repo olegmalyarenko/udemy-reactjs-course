@@ -30,7 +30,7 @@ export default class ItemDetails extends Component {
     updateItem(){
         
         const { itemId, getData, getImageUrl } = this.props;
-        console.log('itemid', itemId);
+        console.log('itemid', itemId, getData, getImageUrl);
         if (!itemId) {
             return;
         }
@@ -56,8 +56,7 @@ export default class ItemDetails extends Component {
 
         }
         
-        const { name
-        } = item;
+        const { name } = item;
 
         console.log('Рендер айтем', this.state.item);
         return (
