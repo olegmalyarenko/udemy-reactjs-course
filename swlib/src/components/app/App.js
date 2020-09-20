@@ -25,14 +25,6 @@ export default class App extends Component {
         hasError: false
     }
 
-    toggleRandomPlanet = () => {
-        this.setState((state) => {
-          return {
-            showRandomPlanet: !state.showRandomPlanet
-          }
-        });
-      };
-     
     
 
     componentDidCatch() {
@@ -45,37 +37,28 @@ export default class App extends Component {
         return <ErrorIndicator/>
       }
 
-        const planet = this.state.showRandomPlanet ?
-      <RandomPlanet/> : null;
-
+        
       return (
             <div className="stardb-app">
               <SwapiServiceProvider value={this.swapiService}>
               <Header/>
-              { planet }
-              <div className="buttons row mb2 button-row">
-                <button
-                  className="toggle-planet btn btn-warning btn-lg"
-                  onClick={this.toggleRandomPlanet}>
-                  Toggle Random Planet
-                </button>
-                <ErrorButton/>
-               </div>
+              <RandomPlanet/>
+              
+               <Row 
+               left={<PersonList/>} 
+               right={ <PersonDetails itemId={1}/>}
+               />
 
+              <Row 
+               left={<PlanetList/>} 
+               right={<PlanetDetails itemId={3}/>}
+               />
 
-               <PersonDetails itemId={1}/>
-
-               <StarshipDetails itemId={2}/>
-
-               <PlanetDetails itemId={3}/>
-
-
-               
-               <PersonList/>
-                
-               <PlanetList/>
-                
-               <StarshipList/>
+              <Row 
+               left={<StarshipList/>} 
+               right={ <StarshipDetails itemId={2}/> }
+               />
+            
                </SwapiServiceProvider>   
             </div>
         )
