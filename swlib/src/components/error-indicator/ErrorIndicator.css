@@ -1,0 +1,17 @@
+.erros-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.erros-indicator h2 {
+  color: yellow;
+}
+
+.erros-indicator h3 {
+  color: yellow;
+}
+.boom {
+  margin-top: 40px;
+}
