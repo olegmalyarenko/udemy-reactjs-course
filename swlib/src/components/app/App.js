@@ -5,7 +5,7 @@ import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator';
 import { SwapiServiceProvider } from '../sw-contex';
 import { PeoplePage, StarshipPage, PlanetPage, LoginPage, SecretPage } from '../pages';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import SwapiService from '../../services/swapi-service.js';
 import { StarshipDetails } from '../sw-components';
@@ -41,8 +41,10 @@ export default class App extends Component {
             <div className="stardb-app">
               <SwapiServiceProvider value={this.swapiService}>
                <Router> 
+                
                  <Header/>
                  <RandomPlanet />
+                 <Switch>
                  <Route path="/" 
                  render={() => <h2>Welcome to StarDB</h2>}
                  exact={true}/>
@@ -63,7 +65,9 @@ export default class App extends Component {
                   <Route path="/secret-page" render={() => (
                    <SecretPage isLoggedIn={isLoggedIn}/>
                  )} />
-
+                 
+                 <Route render={() => <h2>Page not found</h2>} />
+                 </Switch>
                 </Router>
                </SwapiServiceProvider> 
                  
@@ -73,3 +77,4 @@ export default class App extends Component {
 }
 
 
+// <Redirect to="/" /> can use before switch for redirect when you come to incorrect url
