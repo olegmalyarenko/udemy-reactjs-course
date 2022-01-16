@@ -5,7 +5,8 @@ import TodoList from '../TodoList';
 import ItemFilter from '../ItemFilter';
 import AddButton from '../AddButton';
 import './App.css';
-
+import MainHeader from '../MainHeader';
+import Footer from '../Footer';
 
 export default class App extends Component { 
 
@@ -133,7 +134,10 @@ export default class App extends Component {
         const visible = this.searchItem(this.filterItem(todos, filter), term);
         
     return (
+        <>
+         <MainHeader/>
         <div className='todo-app'>
+       
          <AppHeader toDo={todoCounter} done={doneCounter} />
 
          <div className="top-panel d-flex">
@@ -157,6 +161,8 @@ export default class App extends Component {
      
 
         </div>
+        <Footer/>
+        </>
     )
     } 
 }

@@ -1,0 +1,22 @@
+ header{
+     width: 100%;
+     background: black;
+     padding-top: 10px;
+ }
+ header, .navigation, .title-block{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+li > a {
+    margin: 0 20px;
+    cursor: pointer;
+}
+.navigation-item, .title {
+    list-style: none;
+    color: whitesmoke;
+}
+.title-icon{
+    color: whitesmoke;
+    font-size: 24px;
+}
